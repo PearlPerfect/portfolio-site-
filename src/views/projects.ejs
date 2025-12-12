@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/navbar', { activePage: 'projects' }) %>
+
+    <!-- Projects Page Hero Section -->
+    <section class="projects-hero">
+        <div class="container">
+            <div class="projects-hero-content">
+                <div class="projects-hero-header">
+                    <h1 class="projects-hero-title">
+                        <span class="hero-highlight">Project</span> Showcase
+                    </h1>
+                    <p class="projects-hero-subtitle">
+                        Complete collection of backend projects from HNG Internship Stages 0-9
+                    </p>
+                </div>
+                
+                <div class="projects-hero-stats">
+                    <div class="project-stat">
+                        <div class="project-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <div class="project-stat-info">
+                            <div class="project-stat-number"><%= stats.totalProjects %></div>
+                            <div class="project-stat-label">Total Projects</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-stat">
+                        <div class="project-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                        </div>
+                        <div class="project-stat-info">
+                            <div class="project-stat-number"><%= stats.stages %></div>
+                            <div class="project-stat-label">Stages Completed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-stat">
+                        <div class="project-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        <div class="project-stat-info">
+                            <div class="project-stat-number"><%= stats.technologies %></div>
+                            <div class="project-stat-label">Technologies</div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-stat">
+                        <div class="project-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="project-stat-info">
+                            <div class="project-stat-number">100%</div>
+                            <div class="project-stat-label">Backend Focus</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="projects-hero-description">
+                    <p>
+                        This portfolio represents my journey through the HNG Backend Internship, 
+                        showcasing my growth from building simple REST APIs to architecting complex 
+                        microservices systems. Each project demonstrates practical implementation 
+                        of backend technologies and best practices.
+                    </p>
+                    <div class="project-categories">
+                        <span class="category-tag">REST APIs</span>
+                        <span class="category-tag">Microservices</span>
+                        <span class="category-tag">Database Design</span>
+                        <span class="category-tag">Authentication</span>
+                        <span class="category-tag">Payment Integration</span>
+                        <span class="category-tag">Message Queues</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Filter -->
+    <section class="projects-filter">
+        <div class="container">
+            <div class="filter-controls">
+                <a href="/projects" class="filter-btn active">All Projects</a>
+                <a href="/projects/stage-0-profile" class="filter-btn">Stage 0</a>
+                <a href="/projects/stage-1-string-analyzer" class="filter-btn">Stage 1</a>
+                <a href="/projects/stage-2-country-currency" class="filter-btn">Stage 2</a>
+                <a href="/projects/stage-3-ai-agent" class="filter-btn">Stage 3</a>
+                <a href="/projects/stage-4-notification-system" class="filter-btn">Stage 4</a>
+                <a href="/projects/stage-7-auth-api-keys" class="filter-btn">Stage 7</a>
+                <a href="/projects/stage-8-wallet-service" class="filter-btn">Stage 8</a>
+                <a href="/projects/stage-9-portfolio" class="filter-btn">Stage 9</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Projects Section -->
+    <section class="all-projects">
+        <div class="container">
+            <div class="projects-grid">
+                <% projects.forEach(project => { %>
+                <div class="project-card" data-stage="<%= project.id.split('-')[1] %>">
+                    <div class="project-header">
+                        <span class="project-stage"><%= project.stage %></span>
+                        <a href="<%= project.githubUrl %>" class="github-link" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <h3 class="project-title"><%= project.title %></h3>
+                    <p class="project-description"><%= project.description %></p>
+                    
+                    <div class="project-tech">
+                        <% project.technologies.slice(0, 4).forEach(tech => { %>
+                        <span class="tech-tag"><%= tech %></span>
+                        <% }) %>
+                        <% if (project.technologies.length > 4) { %>
+                        <span class="tech-tag more">+<%= project.technologies.length - 4 %></span>
+                        <% } %>
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="/projects/<%= project.id %>" class="btn-primary">View Details</a>
+                        <a href="<%= project.liveUrl %>" target="_blank" class="btn-secondary">Live Demo</a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
+
+<style>
+/* Projects Page Hero Styles */
+.projects-hero {
+    padding: 6rem 0 4rem;
+    background: linear-gradient(135deg, var(--bg-dark), var(--bg-card));
+    border-bottom: 1px solid var(--border);
+}
+
+.projects-hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.projects-hero-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.projects-hero-title {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.hero-highlight {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.hero-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+.projects-hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.projects-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.project-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    transition: all 0.3s;
+}
+
+.project-stat:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+.project-stat-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.project-stat-info {
+    flex: 1;
+}
+
+.project-stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.project-stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.projects-hero-description {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.projects-hero-description p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.project-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.category-tag {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.category-tag:hover {
+    background: rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Projects Filter */
+.projects-filter {
+    padding: 2rem 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 70px;
+    z-index: 100;
+}
+
+.filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.all-projects {
+    padding: 4rem 0;
+}
+
+@media (max-width: 1024px) {
+    .projects-hero-title {
+        font-size: 3rem;
+    }
+    
+    .projects-hero-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .projects-hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-hero {
+        padding: 4rem 0 3rem;
+    }
+    
+    .projects-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .projects-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .project-stat {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .project-stat-number {
+        font-size: 2rem;
+    }
+    
+    .projects-hero-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-controls {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-hero-title {
+        font-size: 2rem;
+    }
+    
+    .projects-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .project-categories {
+        justify-content: center;
+    }
+}
+</style>

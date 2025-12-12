@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body>
+    <%- include('partials/navbar', { activePage: 'home' }) %>
+
+    <!-- Home Page Hero Section -->
+    <section class="home-hero">
+      <div class="container">
+        <div class="home-hero-content">
+          <div class="home-hero-text">
+            <h1 class="home-hero-title">
+              Hello, I'm a <span class="gradient-text">Backend Developer</span>
+            </h1>
+            <p class="home-hero-subtitle">
+              I build scalable APIs, microservices, and distributed systems that
+              power modern applications. Welcome to my portfolio showcasing my
+              journey through the HNG Backend Internship.
+            </p>
+            <div class="home-hero-actions">
+              <a href="#featured" class="btn-primary">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+                Explore My Work
+              </a>
+              <a href="/projects" class="btn-secondary">View All Projects</a>
+            </div>
+          </div>
+          <div class="home-hero-visual">
+            <div class="code-visual">
+              <div class="code-window">
+                <div class="code-header">
+                  <div class="code-dots">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                  </div>
+                  <span class="code-title">server.ts</span>
+                </div>
+                <div class="code-content">
+                  <pre><code>const server = express();
+server.use(cors());
+server.use(helmet());
+
+// API Routes
+server.use('/api', apiRouter);
+server.use('/auth', authRouter);
+
+// Microservices
+const services = [
+  'notification-service',
+  'payment-service',
+  'user-service'
+];
+
+// Start server
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-number"><%= stats.totalProjects %></div>
+            <div class="hero-stat-label">Projects Built</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number"><%= stats.stages %></div>
+            <div class="hero-stat-label">Stages Completed</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number"><%= stats.technologies %></div>
+            <div class="hero-stat-label">Technologies</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number">100%</div>
+            <div class="hero-stat-label">Backend Focused</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section (On Home Page) -->
+    <section class="about-on-home">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=400&h=400&fit=crop&crop=face"
+              alt="Backend Developer"
+            />
+          </div>
+          <div class="about-text">
+            <h3>Backend Developer & API Architect</h3>
+            <p>
+              I'm a passionate backend developer specializing in building
+              scalable, efficient, and robust server-side applications. Through
+              the HNG Backend Internship, I've completed 8+ comprehensive stages
+              covering everything from RESTful APIs to complex microservices
+              architectures.
+            </p>
+            <p>
+              My expertise spans Node.js, TypeScript, Express.js, multiple
+              databases (PostgreSQL, MongoDB, MySQL, Redis), message queues
+              (RabbitMQ, Kafka), and modern development practices including
+              CI/CD, Docker, and microservices patterns.
+            </p>
+            <div class="quick-stats">
+              <div class="quick-stat">
+                <strong>8+</strong>
+                <span>Projects Completed</span>
+              </div>
+              <div class="quick-stat">
+                <strong>15+</strong>
+                <span>Technologies</span>
+              </div>
+              <div class="quick-stat">
+                <strong>100%</strong>
+                <span>Commitment</span>
+              </div>
+            </div>
+            <a
+              href="/about"
+              class="btn-primary"
+              style="display: inline-block; margin-top: 1.5rem"
+              >Learn More About Me</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects" id="featured">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">
+          Showcasing some of my key projects from the HNG Backend Internship
+        </p>
+
+        <div class="projects-grid">
+          <% featuredProjects.forEach(project => { %>
+          <div class="project-card" data-stage="<%= project.stage %>">
+            <div class="project-header">
+              <span class="project-stage"><%= project.stage %></span>
+              <a
+                href="<%= project.githubUrl %>"
+                class="github-link"
+                target="_blank"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  />
+                </svg>
+              </a>
+            </div>
+            <h3 class="project-title"><%= project.title %></h3>
+            <p class="project-description"><%= project.description %></p>
+
+            <div class="project-tech">
+              <% project.technologies.slice(0, 3).forEach(tech => { %>
+              <span class="tech-tag"><%= tech %></span>
+              <% }) %> <% if (project.technologies.length > 3) { %>
+              <span class="tech-tag more"
+                >+<%= project.technologies.length - 3 %></span
+              >
+              <% } %>
+            </div>
+
+            <div class="project-links">
+              <a href="/projects/<%= project.id %>" class="btn-primary"
+                >View Details</a
+              >
+              <a
+                href="<%= project.liveUrl %>"
+                target="_blank"
+                class="btn-secondary"
+                >Live Demo</a
+              >
+            </div>
+          </div>
+          <% }) %>
+        </div>
+
+        <div class="view-all">
+          <a href="/projects" class="btn-primary">View All Projects →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+      <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                />
+              </svg>
+            </div>
+            <h3>API Development</h3>
+            <p>
+              RESTful APIs, GraphQL endpoints, and real-time WebSocket
+              connections
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path d="M12 20h9" />
+                <path
+                  d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                />
+              </svg>
+            </div>
+            <h3>Microservices</h3>
+            <p>
+              Scalable distributed systems with message queues and service
+              discovery
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                />
+              </svg>
+            </div>
+            <h3>DevOps & CI/CD</h3>
+            <p>
+              Docker containerization, cloud deployment, and automated pipelines
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Updated CTA Section with Social Links -->
+    <section class="cta">
+      <div class="container">
+        <h2>Ready to Build Something Amazing?</h2>
+        <p>Let's connect and discuss your backend development needs</p>
+
+        <div class="social-links">
+          <a href="mailto:your.email@example.com" class="social-link">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            <span>Email</span>
+          </a>
+          <a
+            href="https://github.com/yourusername"
+            target="_blank"
+            class="social-link"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              />
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            class="social-link"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+              />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://twitter.com/yourusername"
+            target="_blank"
+            class="social-link"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+              />
+            </svg>
+            <span>Twitter</span>
+          </a>
+        </div>
+
+        <div class="cta-buttons">
+          <a href="/contact" class="btn-primary small-btn">Get In Touch</a>
+          <a href="/about" class="btn-secondary small-btn"
+            >Learn More About Me</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>
+
+<style>
+  /* Home Page Hero Styles */
+  .home-hero {
+    padding: 6rem 0 4rem;
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.1),
+      rgba(139, 92, 246, 0.1)
+    );
+    overflow: hidden;
+    position: relative;
+  }
+
+  .home-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 20% 80%,
+        rgba(99, 102, 241, 0.15) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(139, 92, 246, 0.15) 0%,
+        transparent 50%
+      );
+    z-index: 0;
+  }
+
+  .home-hero .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-hero-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .home-hero-text {
+    flex: 1;
+  }
+
+  .home-hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .home-hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .home-hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .home-hero-actions .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .code-visual {
+    background: var(--bg-card);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .code-window {
+    background: #1a1b26;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .code-header {
+    background: #24283b;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #414868;
+  }
+
+  .code-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .code-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .code-dot.red {
+    background: #ff5f56;
+  }
+  .code-dot.yellow {
+    background: #ffbd2e;
+  }
+  .code-dot.green {
+    background: #27ca3f;
+  }
+
+  .code-title {
+    color: #a9b1d6;
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+  }
+
+  .code-content {
+    padding: 1.5rem;
+  }
+
+  .code-content pre {
+    margin: 0;
+    overflow-x: auto;
+  }
+
+  .code-content code {
+    font-family: "Fira Code", "Courier New", monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #9dccff;
+  }
+
+  .code-content .keyword {
+    color: #c792ea;
+  }
+  .code-content .function {
+    color: #82aaff;
+  }
+  .code-content .string {
+    color: #c3e88d;
+  }
+  .code-content .comment {
+    color: #546e7a;
+  }
+  .code-content .number {
+    color: #f78c6c;
+  }
+
+  .home-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+  }
+
+  .hero-stat:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+  }
+
+  .hero-stat-number {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  /* Existing styles for other sections */
+  .about-on-home {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.05));
+  }
+
+  .about-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .about-image {
+    flex: 0 0 300px;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 3px solid var(--primary);
+    box-shadow: 0 20px 40px var(--shadow);
+  }
+
+  .about-text {
+    flex: 1;
+  }
+
+  .about-text h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .about-text p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  .quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .quick-stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    transition: all 0.3s;
+  }
+
+  .quick-stat:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--shadow);
+  }
+
+  .quick-stat strong {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .quick-stat span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .featured-projects {
+    padding: 6rem 0;
+  }
+
+  .view-all {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .services {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.05));
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .service-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px var(--shadow);
+  }
+
+  .service-icon {
+    background: rgba(99, 102, 241, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--primary);
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .service-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Updated CTA Section */
+  .cta {
+    padding: 6rem 0;
+    text-align: center;
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.1),
+      rgba(139, 92, 246, 0.1)
+    );
+  }
+
+  .cta h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .cta p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    min-width: 100px;
+  }
+
+  .social-link:hover {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateY(-5px);
+  }
+
+  .social-link svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .social-link span {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .small-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 1024px) {
+    .home-hero-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 3rem;
+    }
+
+    .home-hero-title {
+      font-size: 2.5rem;
+    }
+
+    .home-hero-subtitle {
+      font-size: 1.1rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .home-hero-actions {
+      justify-content: center;
+    }
+
+    .social-links {
+      gap: 1rem;
+    }
+
+    .social-link {
+      min-width: 80px;
+      padding: 0.75rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .home-hero {
+      padding: 4rem 0 3rem;
+    }
+
+    .home-hero-title {
+      font-size: 2rem;
+    }
+
+    .home-hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .home-hero-actions {
+      flex-direction: column;
+    }
+
+    .home-hero-stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .hero-stat-number {
+      font-size: 2rem;
+    }
+
+    .about-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .about-image {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .about-image img {
+      height: 300px;
+    }
+
+    .cta-buttons,
+    .home-hero-actions {
+      flex-direction: column;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+    }
+
+    .social-links {
+      gap: 0.5rem;
+    }
+
+    .social-link {
+      min-width: 70px;
+      padding: 0.5rem;
+    }
+
+    .social-link svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home-hero-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .home-hero-title {
+      font-size: 1.75rem;
+    }
+
+    .about-image {
+      max-width: 250px;
+    }
+
+    .about-image img {
+      height: 250px;
+    }
+
+    .quick-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .social-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .social-link {
+      min-width: 60px;
+      padding: 0.5rem;
+    }
+
+    .social-link span {
+      font-size: 0.8rem;
+    }
+  }
+</style>

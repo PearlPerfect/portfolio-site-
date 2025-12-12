@@ -1,0 +1,21 @@
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="container">
+        <a href="/" class="logo">
+            <span class="logo-bracket">&lt;</span>Pearl<span class="logo-highlight">Perfect</span><span class="logo-bracket">/&gt;</span>
+        </a>
+        <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+        <ul class="nav-links">
+            <li><a href="/" class="<%= activePage === 'home' ? 'active' : '' %>">Home</a></li>
+            <li><a href="/projects" class="<%= activePage === 'projects' ? 'active' : '' %>">Projects</a></li>
+            <li><a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>">About</a></li>
+            <li><a href="/contact" class="<%= activePage === 'contact' ? 'active' : '' %>">Contact</a></li>
+            <li><a href="/api-docs-page" class="<%= activePage === 'api-docs' ? 'active' : '' %>">API Docs</a></li>
+            <li><a href="/api/projects" target="_blank" class="api-link">API</a></li>
+        </ul>
+    </div>
+</nav>

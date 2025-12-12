@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/navbar', { activePage: '' }) %>
+
+    <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+        <div>
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="var(--warning)" style="margin: 0 auto 2rem;">
+                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                <line x1="12" y1="8" x2="12" y2="12" stroke-width="2"/>
+                <line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2"/>
+            </svg>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Oops! Something went wrong</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;"><%= message || 'An unexpected error occurred. Please try again later.' %></p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="/" class="btn-primary" style="display: inline-block; padding: 1rem 2rem;">Go Home</a>
+                <button onclick="history.back()" class="btn-secondary" style="padding: 1rem 2rem;">Go Back</button>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
