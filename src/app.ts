@@ -10,10 +10,12 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import projectRoutes from './routes/projects';
 
+// Load environment variables
 dotenv.config();
 
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Swagger configuration
 const swaggerOptions = {
@@ -30,11 +32,11 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
+        url: `http://localhost:${PORT}`,
         description: 'Development server'
       },
       {
-        url: 'https://your-portfolio.railway.app',
+        url: 'https://your-portfolio.onrender.com',
         description: 'Production server'
       }
     ],
@@ -115,7 +117,7 @@ const swaggerOptions = {
       }
     }
   },
-  apis: ['./src/routes/*.ts'] // Path to the API routes
+  apis: ['./src/routes/*.ts']
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
@@ -127,12 +129,12 @@ app.use(helmet({
 app.use(cors());
 
 // Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: 'Too many requests from this IP, please try again later.'
-});
-app.use('/api/', limiter);
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+//   message: 'Too many requests from this IP, please try again later.'
+// });
+// app.use('/api/', limiter);
 
 // Body parsing middleware
 app.use(express.json());
@@ -140,7 +142,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 
 // Logging
-app.use(morgan('dev'));
+if (NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -156,16 +160,18 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/', projectRoutes);
 
 // Health check endpoint
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
     status: 'success',
     message: 'Portfolio API is running',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    environment: NODE_ENV,
+    port: PORT
   });
 });
 
 // 404 handler
-app.use((req: Request, res: Response) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).render('404', {
     title: 'Page Not Found',
     activePage: '',
@@ -174,20 +180,28 @@ app.use((req: Request, res: Response) => {
 });
 
 // Error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  console.error('Error:', err.stack);
   res.status(500).render('error', {
     title: 'Error',
     activePage: '',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong!'
+    message: NODE_ENV === 'development' ? err.message : 'Something went wrong!'
   });
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🚀 Portfolio server running on http://localhost:${PORT}`);
   console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);
-  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`📝 Environment: ${NODE_ENV}`);
+});
+
+// Handle graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM signal received: closing HTTP server');
+  server.close(() => {
+    console.log('HTTP server closed');
+  });
 });
 
 export default app;
